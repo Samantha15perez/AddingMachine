@@ -42,7 +42,7 @@ namespace AddingMachine
                     //sets the value of the first element in the array to whatever is in the input box
                     total = total + AddingMachineArray[i];
                     //puts the sum of the array into a variable
-                    PreviousNumbers = PreviousNumbers + AddingMachineArray[i].ToString() + ", " + System.Environment.NewLine;
+                    PreviousNumbers = PreviousNumbers + "+ " + AddingMachineArray[i].ToString() + ", " + System.Environment.NewLine;
                     //adds the current number to the list of previous numbers                    
                     labelAddedNumbers.Text = PreviousNumbers;
                     //prints the list
@@ -79,6 +79,9 @@ namespace AddingMachine
         }
         private void buttonClear_Click(object sender, EventArgs e)
         {
+            textBoxAddNumber.Focus();
+            //sets the focus immediately to the text box 
+
             //this resets everything
             total = 0;
             i = 0;
@@ -88,5 +91,89 @@ namespace AddingMachine
             Array.Clear(AddingMachineArray, 0, AddingMachineArray.Length);
             textBoxAddNumber.Text = "";
         }
+
+        private void buttonMultiply_Click(object sender, EventArgs e)
+        {
+            textBoxAddNumber.Focus();
+            //sets the focus immediately to the text box 
+            try
+            {
+
+            if (Double.Parse(textBoxAddNumber.Text) > 0)
+            {
+
+                AddingMachineArray[i] = Double.Parse(textBoxAddNumber.Text);
+                //sets the value of the first element in the array to whatever is in the input box
+                total = total * AddingMachineArray[i];
+                //multiplies the running total by the value within the input box
+                PreviousNumbers = PreviousNumbers + "✕ " + AddingMachineArray[i].ToString() + ", " + System.Environment.NewLine;
+                //adds the current number to the list of previous numbers                    
+                labelAddedNumbers.Text = PreviousNumbers;
+                //prints the list
+                labelRunningTotal.Text = total.ToString();
+                //prints the total to the textbox
+                textBoxAddNumber.Text = "";
+                //blanks out the text box once you hit the button
+                i++;
+                //shifts the position of the array foreward by one. 
+            }
+            else
+            {
+                //error handling if the number is not positive
+                MessageBox.Show("Please only use positive numbers!");
+                textBoxAddNumber.Text = "";
+            }
+
+            }
+            catch
+            {
+                //error handling for everything else
+                MessageBox.Show("Numbers only, please.");
+                textBoxAddNumber.Text = "";
+            }
+        }
+
+        private void buttonDivide_Click(object sender, EventArgs e)
+        {
+            textBoxAddNumber.Focus();
+            //sets the focus immediately to the text box 
+            try
+            {
+
+                if (Double.Parse(textBoxAddNumber.Text) > 0)
+                {
+
+                    AddingMachineArray[i] = Double.Parse(textBoxAddNumber.Text);
+                    //sets the value of the first element in the array to whatever is in the input box
+                    total = total / AddingMachineArray[i];
+                    //multiplies the running total by the value within the input box
+                    PreviousNumbers = PreviousNumbers + "÷ " + AddingMachineArray[i].ToString() + ", " + System.Environment.NewLine;
+                    //adds the current number to the list of previous numbers                    
+                    labelAddedNumbers.Text = PreviousNumbers;
+                    //prints the list
+                    labelRunningTotal.Text = total.ToString();
+                    //prints the total to the textbox
+                    textBoxAddNumber.Text = "";
+                    //blanks out the text box once you hit the button
+                    i++;
+                    //shifts the position of the array foreward by one. 
+                }
+                else
+                {
+                    //error handling if the number is not positive
+                    MessageBox.Show("Please only use positive numbers!");
+                    textBoxAddNumber.Text = "";
+                }
+
+            }
+            catch
+            {
+                //error handling for everything else
+                MessageBox.Show("Numbers only, please.");
+                textBoxAddNumber.Text = "";
+            }
+        }
+
+
     }
 }
