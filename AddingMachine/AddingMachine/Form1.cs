@@ -174,6 +174,46 @@ namespace AddingMachine
             }
         }
 
+        private void buttonSubtract_Click(object sender, EventArgs e)
+        {
+            
+                textBoxAddNumber.Focus();
+                //sets the focus immediately to the text box 
+                try
+                {
 
+                    if (Double.Parse(textBoxAddNumber.Text) > 0)
+                    {
+
+                        AddingMachineArray[i] = Double.Parse(textBoxAddNumber.Text);
+                        //sets the value of the first element in the array to whatever is in the input box
+                        total = total - AddingMachineArray[i];
+                        //subtracts the value from the running total
+                        PreviousNumbers = PreviousNumbers + "- " + AddingMachineArray[i].ToString() + ", " + System.Environment.NewLine;
+                        //adds the current number to the list of previous numbers                    
+                        labelAddedNumbers.Text = PreviousNumbers;
+                        //prints the list
+                        labelRunningTotal.Text = total.ToString();
+                        //prints the total to the textbox
+                        textBoxAddNumber.Text = "";
+                        //blanks out the text box once you hit the button
+                        i++;
+                        //shifts the position of the array foreward by one. 
+                    }
+                    else
+                    {
+                        //error handling if the number is not positive
+                        MessageBox.Show("Please only use positive numbers!");
+                        textBoxAddNumber.Text = "";
+                    }
+
+                }
+                catch
+                {
+                    //error handling for everything else
+                    MessageBox.Show("Numbers only, please.");
+                    textBoxAddNumber.Text = "";
+                }
+            }
     }
 }
